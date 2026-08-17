@@ -1,18 +1,33 @@
 {
   "run_id": "sglang-dspark-q200",
-  "elapsed_s": 2366.96,
-  "gsm8k_flex": {"n": 80, "passed": 66, "pct": 82.5},
-  "gsm8k_numeric_norm": {"n": 80, "passed": 74, "pct": 92.5},
-  "humaneval": {"n": 40, "passed": 39},
-  "ifeval": {"n": 40, "passed": 37},
-  "agentic_coding": {"n": 20, "passed": 18},
-  "hard_reasoning": {"n": 20, "passed": null, "note": "manual grade"},
-  "vllm_floor": {
-    "gsm8k_flex": 81.25,
-    "gsm8k_numeric_norm": 91.25,
+  "engine": "sglang",
+  "profile": "native DSPARK K=7",
+  "thinking": "off",
+  "n": 200,
+  "set_sha256": "ca35650e0bf4c9997772276c15a7116afd553a305b10c88182f52f050b76e066",
+  "elapsed_s": 2366.77,
+  "total_completion_tokens": 77363,
+  "protocol": "client e2e tok/s = completion_tokens / wall (includes prefill)",
+  "scores": {
+    "gsm8k_flex": "66/80 = 82.5%",
+    "gsm8k_numeric_norm": "74/80 = 92.5%",
     "humaneval": "39/40",
     "ifeval": "37/40",
-    "agentic": "17/20"
+    "agentic_coding": "18/20",
+    "hard_reasoning": "20 written, not auto-graded"
   },
-  "llama_benchy_first_pass": "INVALID — HTTP 400 return_token_ids+stream; rerun with return_token_ids=false"
+  "overall": {
+    "mean_e2e_tok_s": 38.09,
+    "median_e2e_tok_s": 37.66,
+    "token_weighted_tok_s": 32.69,
+    "top_e2e_tok_s": 66.82,
+    "top_id": "humaneval-031"
+  },
+  "families": {
+    "gsm8k": {"n": 80, "flex": 66, "numeric_norm": 74, "mean": 37.59, "median": 37.33, "top": 46.95, "top_id": "gsm8k-010"},
+    "humaneval": {"n": 40, "pass": 39, "mean": 58.87, "median": 59.62, "top": 66.82, "top_id": "humaneval-031"},
+    "ifeval": {"n": 40, "pass": 37, "mean": 18.19, "median": 16.39, "top": 38.39, "top_id": "ifeval-032"},
+    "agentic_coding": {"n": 20, "pass": 18, "mean": 42.97, "median": 43.28, "top": 50.69, "top_id": "agentic-08"},
+    "hard_reasoning": {"n": 20, "pass": null, "mean": 33.45, "median": 32.89, "top": 43.48, "top_id": "hard-04"}
+  }
 }

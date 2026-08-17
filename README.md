@@ -77,6 +77,19 @@ code `QWEN38-NIAH-9X4K`, 512 gen). Files: `niah-results-eagle.json`,
 
 Quality set: `artifacts/quality-200.jsonl` sha256 `ca35650e…`.
 
+DSpark quality-200 (think-off, client e2e tok/s = completion_tokens / wall):
+
+| Family | score | mean | median | top |
+|---|---|---:|---:|---:|
+| GSM8K flex / numeric | 66/80 = 82.5% · 74/80 = 92.5% | 37.6 | 37.3 | 47.0 (`gsm8k-010`) |
+| HumanEval | 39/40 | 58.9 | 59.6 | **66.8** (`humaneval-031`) |
+| IFEval | 37/40 | 18.2 | 16.4 | 38.4 (`ifeval-032`) |
+| Agentic | 18/20 | 43.0 | 43.3 | 50.7 (`agentic-08`) |
+| Hard reasoning | 20 written, not auto-graded | 33.5 | 32.9 | 43.5 (`hard-04`) |
+| All 200 | — | 38.1 | 37.7 | **66.8** |
+
+Token-weighted overall 32.7 tok/s (77.4k tokens / 39.4 min). File: `quality-200-sglang-dspark.json`.
+
 Think-on throughput uses the same `scripts/run_perf_suite.sh` with
 `EXTRA_BODY_FILE=reference/think-on-extra.json`
 (`{"chat_template_kwargs":{"enable_thinking":true}}`).

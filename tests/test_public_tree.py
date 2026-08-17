@@ -31,6 +31,7 @@ REQUIRED = (
     "perf-summary-dspark.json",
     "perf-summary-eagle-thinkon.json",
     "perf-summary-dspark-thinkon.json",
+    "quality-200-sglang-dspark.json",
     "reference/think-on-extra.json",
 )
 

@@ -69,7 +69,7 @@ ladder 1024→256 c1/2/4/8 ×3; ignore-eos; temp 0; seed 0;
 | SGLang EAGLE | **25.62** | 27.65 / 43.74 / 74.31 / **123.90** | 8/8 | not run (DSpark Q200 stands) |
 | SGLang DSpark | **20.97** | 16.96 / 26.20 / 48.15 / 82.53 | 8/8 | flex 82.5 / HE 39/40 / IF 37/40 / ag 18/20 |
 | vLLM MTP K3 | 27.83 | 19.24 / 32.00 / 34.61 / 82.89 | 8/8 | flex 81.25 / HE 39/40 / IF 37/40 / ag 17/20 |
-| vLLM DSpark K7 | 28.46 | 16.05 / 28.47 / 43.88 / 61.53 | 8/8 | think-off prose |
+| vLLM DSpark K7 | 28.46 | 16.05 / 28.47 / 43.88 / 61.53 | 8/8 | flex 82.5 / HE 39/40 / IF 37/40 / ag **19/20** |
 
 NIAH is the vLLM `niah-results.json` shape (7726 / 31000 / 124132 + 247738 × 5,
 code `QWEN38-NIAH-9X4K`, 512 gen). Files: `niah-results-eagle.json`,
@@ -89,6 +89,8 @@ DSpark quality-200 (think-off, client e2e tok/s = completion_tokens / wall):
 | All 200 | — | 38.1 | 37.7 | **66.8** |
 
 Token-weighted overall 32.7 tok/s (77.4k tokens / 39.4 min). File: `quality-200-sglang-dspark.json`.
+
+Matched vLLM DSpark on the same 200: GSM8K / HumanEval / IFEval identical; vLLM agentic 19/20; vLLM e2e mean 33.4 / top 57.5. See the sibling repo `quality-200-vllm-dspark.json`.
 
 Think-on throughput uses the same `scripts/run_perf_suite.sh` with
 `EXTRA_BODY_FILE=reference/think-on-extra.json`

@@ -1,0 +1,12 @@
+# Official cookbook image, pinned to the arm64 digest used for the
+# 2026-08-17 SM121 campaign (EAGLE + native DSPARK).
+#
+# Discovery tag: lmsysorg/sglang:qwen38-27b
+# Repo digest:   lmsysorg/sglang@sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6
+#
+# This Dockerfile does not rebuild SGLang. It retags the official image so a
+# click-run can `docker pull` a pinned digest. Do not substitute nightly.
+FROM lmsysorg/sglang@sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6
+LABEL org.opencontainers.image.source="https://github.com/r0b0tlab/qwen38-27b-nvfp4-sm121-sglang"
+LABEL org.opencontainers.image.description="Pinned official SGLang Qwen3.8-27B cookbook image (SM121 campaign digest)"
+LABEL org.opencontainers.image.revision="sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6"

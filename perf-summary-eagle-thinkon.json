@@ -1,0 +1,11 @@
+{
+  "profile": "SGLang official EAGLE 3/1/4 + fp8 KV auto + mem-fraction 0.70",
+  "image": "lmsysorg/sglang@sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6",
+  "thinking": "on",
+  "protocol": "vllm-repo-run_perf_suite.sh via sglang.bench_serving --backend sglang-oai-chat",
+  "dedicated_c1_median_tok_s": 23.74,
+  "dedicated_c1_accept_mean": 2.665,
+  "ladder_best": {"c1": 23.50, "c2": 33.53, "c4": 56.47, "c8": 92.97},
+  "zero_errors": true,
+  "runs": 17
+}

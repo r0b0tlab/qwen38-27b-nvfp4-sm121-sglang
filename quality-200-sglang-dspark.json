@@ -1,0 +1,18 @@
+{
+  "run_id": "sglang-dspark-q200",
+  "elapsed_s": 2366.96,
+  "gsm8k_flex": {"n": 80, "passed": 66, "pct": 82.5},
+  "gsm8k_numeric_norm": {"n": 80, "passed": 74, "pct": 92.5},
+  "humaneval": {"n": 40, "passed": 39},
+  "ifeval": {"n": 40, "passed": 37},
+  "agentic_coding": {"n": 20, "passed": 18},
+  "hard_reasoning": {"n": 20, "passed": null, "note": "manual grade"},
+  "vllm_floor": {
+    "gsm8k_flex": 81.25,
+    "gsm8k_numeric_norm": 91.25,
+    "humaneval": "39/40",
+    "ifeval": "37/40",
+    "agentic": "17/20"
+  },
+  "llama_benchy_first_pass": "INVALID — HTTP 400 return_token_ids+stream; rerun with return_token_ids=false"
+}

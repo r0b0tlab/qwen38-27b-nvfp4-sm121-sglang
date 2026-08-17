@@ -1,0 +1,14 @@
+{
+  "profile": "SGLang native DSPARK K=7 + official DSparkDraftModel + fp8 KV auto + mem-fraction 0.70",
+  "image": "lmsysorg/sglang@sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6",
+  "checkpoint": "r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121 (4-of-4)",
+  "draft": "RadixArk/Qwen3.8-27B-DSpark (DSparkDraftModel, block 7, unquant)",
+  "thinking": "on",
+  "protocol": "vllm-repo-run_perf_suite.sh via sglang.bench_serving --backend sglang-oai-chat",
+  "dedicated_c1_median_tok_s": 19.83,
+  "dedicated_c1_best_tok_s": 19.90,
+  "dedicated_c1_accept_mean": 2.225,
+  "ladder_best": {"c1": 24.28, "c2": 33.09, "c4": 51.59, "c8": 80.94},
+  "zero_errors": true,
+  "runs": 17
+}

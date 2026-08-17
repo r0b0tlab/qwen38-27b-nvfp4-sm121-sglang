@@ -1,0 +1,14 @@
+{
+  "count": 200,
+  "families": {
+    "agentic_coding": 20,
+    "gsm8k": 80,
+    "humaneval": 40,
+    "hard_reasoning": 20,
+    "ifeval": 40
+  },
+  "ordered_sha256": "0ff53a6e136fa2cf3b57c9741dd377c7a0790fe889fdbc0f4a404da72835a23c",
+  "file_sha256": "ca35650e0bf4c9997772276c15a7116afd553a305b10c88182f52f050b76e066",
+  "seed": 1234,
+  "protocol": "greedy temp=0, enable_thinking=false, max_tokens 1024 (gsm8k/ifeval/hard) / 1536 (humaneval/agentic)"
+}

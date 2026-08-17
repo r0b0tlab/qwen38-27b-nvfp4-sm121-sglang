@@ -1,0 +1,82 @@
+[
+  {
+    "depth": 0.5,
+    "prompt_tokens": 7726,
+    "pass": true,
+    "elapsed_s": 7.3,
+    "answer": "QWEN38-NIAH-9X4K",
+    "http_status": 200,
+    "needle_frac": 0.4985762360859436,
+    "error": null
+  },
+  {
+    "depth": 0.5,
+    "prompt_tokens": 31000,
+    "pass": true,
+    "elapsed_s": 26.9,
+    "answer": "QWEN38-NIAH-9X4K",
+    "http_status": 200,
+    "needle_frac": 0.4996451612903226,
+    "error": null
+  },
+  {
+    "depth": 0.5,
+    "prompt_tokens": 124132,
+    "pass": true,
+    "elapsed_s": 148.2,
+    "answer": "QWEN38-NIAH-9X4K",
+    "http_status": 200,
+    "needle_frac": 0.49991138465504464,
+    "error": null
+  },
+  {
+    "depth": 0.05,
+    "prompt_tokens": 247738,
+    "pass": true,
+    "elapsed_s": 406.8,
+    "answer": "QWEN38-NIAH-9X4K",
+    "http_status": 200,
+    "needle_frac": 0.05009324366871453,
+    "error": null
+  },
+  {
+    "depth": 0.25,
+    "prompt_tokens": 247738,
+    "pass": true,
+    "elapsed_s": 357.9,
+    "answer": "QWEN38-NIAH-9X4K",
+    "http_status": 200,
+    "needle_frac": 0.2500302739184138,
+    "error": null
+  },
+  {
+    "depth": 0.5,
+    "prompt_tokens": 247738,
+    "pass": true,
+    "elapsed_s": 359.9,
+    "answer": "QWEN38-NIAH-9X4K",
+    "http_status": 200,
+    "needle_frac": 0.49995559825299307,
+    "error": null
+  },
+  {
+    "depth": 0.75,
+    "prompt_tokens": 247738,
+    "pass": true,
+    "elapsed_s": 277.2,
+    "answer": "QWEN38-NIAH-9X4K",
+    "http_status": 200,
+    "needle_frac": 0.7498768860651172,
+    "error": null
+  },
+  {
+    "depth": 0.95,
+    "prompt_tokens": 247738,
+    "pass": true,
+    "elapsed_s": 153.0,
+    "answer": "QWEN38-NIAH-9X4K",
+    "http_status": 200,
+    "needle_frac": 0.9498139163148165,
+    "error": null
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "status": "MEASURED",
+  "checkpoint": "r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121 (4-of-4; kv_cache_quant_algo=FP8)",
+  "draft": "RadixArk/Qwen3.8-27B-DSpark (DSparkDraftModel, block 7, unquant)",
+  "engine": "lmsysorg/sglang@sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6",
+  "identity": {
+    "quality_200_sha256": "ca35650e0bf4c9997772276c15a7116afd553a305b10c88182f52f050b76e066",
+    "kv_flag": "checkpoint kv_cache_quant_algo=FP8; SGLang --kv-cache-dtype auto",
+    "canary": "19x23->437",
+    "host": "single GB10 / SM121, Docker --memory 100g --cpus 14"
+  },
+  "gates": {
+    "semantic_10_checks": "PASS (EAGLE + DSpark)",
+    "quality_200_dspark_think_off": {
+      "gsm8k_flex": "66/80 = 82.5%",
+      "gsm8k_numeric_norm": "74/80 = 92.5%",
+      "humaneval": "39/40",
+      "ifeval": "37/40",
+      "agentic": "18/20"
+    },
+    "niah_262144": "PASS 8/8 EAGLE and 8/8 DSpark (vLLM niah-results.json shape)",
+    "perf_think_off": {
+      "eagle_dedicated_c1_median": 25.62,
+      "eagle_c8_best": 123.90,
+      "dspark_dedicated_c1_median": 20.97,
+      "dspark_c8_best": 82.53
+    },
+    "perf_think_on": {
+      "eagle_dedicated_c1_median": 23.74,
+      "eagle_c8_best": 92.97,
+      "dspark_dedicated_c1_median": 19.83,
+      "dspark_c8_best": 80.94
+    }
+  },
+  "vllm_floor_think_off": {
+    "ar_c1": 11.35,
+    "mtp_k3_dedicated_c1": 27.83,
+    "dspark_k7_dedicated_c1": 28.46,
+    "c8_mtp_best": 82.89
+  },
+  "note": "Think-on is throughput-only (run_perf_suite.sh). Quality and NIAH stay think-off."
+}

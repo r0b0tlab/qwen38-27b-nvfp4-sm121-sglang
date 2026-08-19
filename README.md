@@ -121,7 +121,7 @@ Same node, same image base, same checkpoint, same harness, same run-id
 protocol (`dflash2-20260819T014205Z`, zero errors, 17 runs). Accept length is
 the mean drafted tokens accepted per verify step.
 
-| Lane (think-off) | DSpark K7 | DFlash2 K7 | Δ |
+| Lane (think-off) | DSpark K7 | DFlash2 K8 | Δ |
 |---|---:|---:|---:|
 | dedicated c1 median | 20.97 | **28.38** | **+35%** |
 | ladder c1 | 16.96 | **23.47** | +38% |

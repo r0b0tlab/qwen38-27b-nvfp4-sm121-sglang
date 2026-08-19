@@ -1,0 +1,206 @@
+{
+ "profile": "core-subset",
+ "run_id": "20260819T041335Z-6037d480",
+ "date_utc": "2026-08-19",
+ "engine": "sglang",
+ "spec": "DFLASH block 8 (z-lab/Qwen3.8-27B-DFlash2 @ ac041985\u2026)",
+ "image": "qwen38-27b-sglang-dflash2-sm121:0.2.0",
+ "checkpoint": "r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121",
+ "client": "r0b0bench 1.0.0rc2 @ ae4e099",
+ "thinking": "off",
+ "invalid_for_publish": false,
+ "infra_errors_total": 0,
+ "report_json_sha256_prefix": "e2c2d50defe1dde9",
+ "k_sweep": [
+  {
+   "block": 6,
+   "c1_median_tok_s": 25.28,
+   "c8_best_aggregate_tok_s": 158.23,
+   "accept_length": 3.352
+  },
+  {
+   "block": 7,
+   "c1_median_tok_s": 25.79,
+   "c8_best_aggregate_tok_s": 157.82,
+   "accept_length": 3.595
+  },
+  {
+   "block": 8,
+   "c1_median_tok_s": 27.88,
+   "c8_best_aggregate_tok_s": 153.9,
+   "accept_length": 3.581
+  },
+  {
+   "block": 9,
+   "c1_median_tok_s": 26.05,
+   "c8_best_aggregate_tok_s": 123.16,
+   "accept_length": 3.592
+  }
+ ],
+ "k_star": 8,
+ "lanes": {
+  "canary": {
+   "status": "PASS",
+   "infra_errors": 0,
+   "elapsed_s": 9.2,
+   "n": 5
+  },
+  "bfcl_mt": {
+   "status": "PASS",
+   "infra_errors": 0,
+   "elapsed_s": 2027.6,
+   "accuracy": 0.69
+  },
+  "bfcl_ast": {
+   "status": "PASS",
+   "infra_errors": 0,
+   "elapsed_s": 747.1,
+   "micro_accuracy": 0.2733333333333333,
+   "categories": {
+    "multiple": 0.18,
+    "parallel": 0.46,
+    "parallel_multiple": 0.18
+   }
+  },
+  "latency": {
+   "status": "PASS",
+   "infra_errors": 0,
+   "elapsed_s": 27.0,
+   "method": "openai_chat_stream_c1_latency",
+   "ttft_ms_mean": 214.6,
+   "e2el_ms_mean": 3382.7
+  },
+  "concurrency": {
+   "status": "PASS",
+   "infra_errors": 0,
+   "elapsed_s": 218.7,
+   "method": "openai_portable_concurrency_ladder",
+   "aggregate_tok_s": {
+    "1": 68.61,
+    "2": 124.31,
+    "4": 211.98,
+    "6": 276.45
+   }
+  },
+  "throughput": {
+   "status": "PASS",
+   "infra_errors": 0,
+   "elapsed_s": 415.4,
+   "method": "openai_portable_c1_throughput",
+   "decode_median_client_tok_s": 26.02,
+   "prefill_median_server_tok_s": 22662.8
+  },
+  "niah": {
+   "status": "PASS",
+   "infra_errors": 0,
+   "elapsed_s": 552.6,
+   "depths": [
+    65472,
+    130944,
+    235699
+   ],
+   "max_model_len": 262144,
+   "all_pass": true
+  },
+  "qa": {
+   "status": "PASS",
+   "infra_errors": 0,
+   "elapsed_s": 86.6,
+   "accuracy": 0.9625,
+   "n": 400,
+   "method": "arc_easy_mc_letter"
+  },
+  "ifeval": {
+   "status": "PASS",
+   "infra_errors": 0,
+   "elapsed_s": 1584.1,
+   "accuracy": 0.82,
+   "n": 200,
+   "method": "ifeval_lightweight_constraint_scorer"
+  },
+  "humaneval": {
+   "status": "PASS",
+   "infra_errors": 0,
+   "elapsed_s": 270.6,
+   "pass@1": 0.8719512195121951,
+   "n": 164,
+   "method": "humaneval_functional_correctness"
+  },
+  "gsm8k": {
+   "status": "PASS",
+   "infra_errors": 0,
+   "elapsed_s": 727.4,
+   "accuracy": 0.865,
+   "n": 200,
+   "method": "gsm8k_0shot_flexible_extract"
+  }
+ },
+ "extended_ladder_512out": {
+  "1": 29.27,
+  "2": 49.58,
+  "4": 84.18,
+  "8": 131.13,
+  "16": 178.89,
+  "32": 158.57
+ },
+ "telemetry_phases": {
+  "ksweep_block6": {},
+  "ksweep_block7": {
+   "n_samples": 28,
+   "gpu_util_pct_mean": 38.1,
+   "gpu_util_pct_max": 96.0,
+   "power_w_mean": 18.5,
+   "power_w_max": 39.47,
+   "temp_c_max": 66.0,
+   "accept_length_mean": 3.175,
+   "accept_rate_mean": 0.3625
+  },
+  "ksweep_block8": {
+   "n_samples": 30,
+   "gpu_util_pct_mean": 29.4,
+   "gpu_util_pct_max": 96.0,
+   "power_w_mean": 17.2,
+   "power_w_max": 41.33,
+   "temp_c_max": 69.0,
+   "accept_length_mean": 3.163,
+   "accept_rate_mean": 0.309
+  },
+  "ksweep_block9": {
+   "n_samples": 32,
+   "gpu_util_pct_mean": 30.5,
+   "gpu_util_pct_max": 96.0,
+   "power_w_mean": 18.8,
+   "power_w_max": 39.99,
+   "temp_c_max": 66.0,
+   "accept_length_mean": 3.248,
+   "accept_rate_mean": 0.281
+  },
+  "core_subset_full": {
+   "n_samples": 442,
+   "gpu_util_pct_mean": 95.7,
+   "gpu_util_pct_max": 96.0,
+   "power_w_mean": 45.4,
+   "power_w_max": 88.41,
+   "temp_c_max": 88.0,
+   "accept_length_mean": 4.629,
+   "accept_rate_mean": 0.5184
+  },
+  "extended_ladder": {
+   "n_samples": 32,
+   "gpu_util_pct_mean": 96.0,
+   "gpu_util_pct_max": 96.0,
+   "power_w_mean": 44.1,
+   "power_w_max": 52.43,
+   "temp_c_max": 80.0,
+   "accept_length_mean": 3.258,
+   "accept_rate_mean": 0.3226
+  }
+ },
+ "disclosures": [
+  "serve adds --enable-metrics (telemetry only) vs published click-run",
+  "mem-fraction-static 0.73 (0.70 boot KV 234240 < 235955 needed by 90% NIAH; 0.73 -> 262611 >= full 262144)",
+  "IFEval lightweight constraint scorer",
+  "BFCL-AST misses model-side: official adapter decoded >=197/200 rows per category"
+ ],
+ "ledger_entry": "qwen38-27b-nvfp4-sglang-dflash2-k8-core-subset-20260819"
+}

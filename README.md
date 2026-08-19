@@ -109,7 +109,7 @@ ladder 1024→256 c1/2/4/8 ×3; ignore-eos; temp 0; seed 0;
 
 | | dedicated c1 med | ladder best c1 / c2 / c4 / c8 | NIAH 8-pt | Quality-200 |
 |---|---:|---|---|---|
-| SGLang DFlash2 | **28.38** | **23.47 / 36.14 / 54.99 / 92.05** | not run | flex 82.5 / HE 39/40 / IF 37/40 / ag 16/20 |
+| SGLang DFlash2 | **28.38** | **23.47 / 36.14 / 54.99 / 92.05** | full-M 3/3 (r0b0bench, below) | flex 82.5 / HE 39/40 / IF 37/40 / ag 16/20 |
 | SGLang EAGLE | **25.62** | 27.65 / 43.74 / 74.31 / 123.90 | 8/8 | not run (DSpark Q200 stands) |
 | SGLang DSpark | **20.97** | 16.96 / 26.20 / 48.15 / 82.53 | 8/8 | flex 82.5 / HE 39/40 / IF 37/40 / ag 18/20 |
 | vLLM MTP K3 | 27.83 | 19.24 / 32.00 / 34.61 / 82.89 | 8/8 | flex 81.25 / HE 39/40 / IF 37/40 / ag 17/20 |
@@ -188,6 +188,59 @@ Quality and NIAH are think-off only.
 | vLLM DSpark K7 | 28.65 | 16.13 / 28.63 / 44.63 / 62.23 |
 
 Sibling vLLM package: [`r0b0tlab/qwen38-27b-nvfp4-sm121-vllm`](https://github.com/r0b0tlab/qwen38-27b-nvfp4-sm121-vllm).
+
+## r0b0bench core-subset (DFlash2, 2026-08-19)
+
+Full 11-lane `core-subset` (r0b0bench `1.0.0rc2` @ `ae4e099`) against the
+DFlash2 profile on one GB10, thinking off. **11/11 lanes PASS,
+`infra_errors_total=0`, `invalid_for_publish=false`.** report.json sha256
+`e2c2d50defe1dde9…`.
+
+Draft-block (K) sweep first — one variable (`DFLASH_BLOCK_SIZE`), canary
+`19 × 23 → 437` on every row, accept = SGLang mean accept-length gauge:
+
+| block | c1 median tok/s | c8 best agg tok/s | accept length |
+|---:|---:|---:|---:|
+| 6 | 25.28 | 158.23 | 3.35 |
+| 7 | 25.79 | 157.82 | 3.60 |
+| **8** | **27.88** | 153.90 | 3.58 |
+| 9 | 26.05 | 123.16 | 3.59 |
+
+Block 8 wins c1 by ~8–10% over 6/7; block 9 collapses c8 (−22%). K* = 8
+(the draft's native `block_size`). All core-subset rows below are block 8.
+
+| Lane | Result |
+|---|---|
+| canary | PASS |
+| BFCL-MT (official `multi_turn_base`, 200) | **0.69** |
+| BFCL-AST-600 (multiple / parallel / parallel_multiple) | µ **0.2733** (0.18 / 0.46 / 0.18) |
+| latency (c1 streaming) | TTFT **214.6 ms** mean |
+| concurrency (512-out, portable) | C1 68.6 / C2 124.3 / C4 212.0 / C6 **276.4** agg tok/s |
+| throughput | decode **26.02** tok/s median (2048-out ×5) · prefill **22,663** server tok/s (~22.8k-token prompts) |
+| NIAH (full max-context) | 65,472 / 130,944 / **235,699** all PASS, exact retrieval (90% in 336 s) |
+| QA (ARC-Easy MC) | **0.9625** @400 |
+| IFEval (lightweight constraint scorer) | **0.82** @200 |
+| HumanEval | pass@1 **0.8720** @164 |
+| GSM8K (0-shot flexible-extract) | **0.865** @200 |
+
+Supplementary extended ladder (diagnostic, portable backend, 512-out,
+think-off, zero errors): c1 29.3 / c2 49.6 / c4 84.2 / c8 131.1 /
+**c16 178.9** / c32 158.6 agg tok/s — saturation peak at c16
+(`max_running_requests=48`).
+
+AST misses are model-side, not harness: the official adapter decoded
+≥197/200 rows to structured calls in every category; the misses are strict
+AST function-choice/argument mismatches plus ≤3 prose-fallback rows.
+
+Serve deltas for this run only: `--enable-metrics` (telemetry) and
+`--mem-fraction-static 0.73` — a 0.70 boot drew 234,240 KV tokens, below
+the 235,955 the 90% NIAH probe needs; 0.73 yields 262,611 ≥ the full
+262,144 window. Results-ledger entry:
+`qwen38-27b-nvfp4-sglang-dflash2-k8-core-subset-20260819`.
+
+Telemetry (15 s sampling across the whole campaign): suite window GPU util
+mean 95.7%, power mean 45.4 W (max 88.4 W), temp max 88 °C, spec
+accept-length mean 4.63.
 
 ## llama-benchy (diagnostic, not the claim row)
 

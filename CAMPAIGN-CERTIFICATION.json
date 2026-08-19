@@ -1,7 +1,7 @@
 {
   "status": "MEASURED",
   "checkpoint": "r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121 (4-of-4; kv_cache_quant_algo=FP8)",
-  "draft_primary": "z-lab/Qwen3.8-27B-DFlash2 @ ac04198556d7e8867853cbc356807b969f311b05 (DFlash2DraftModel, block 8 = K7, unquant)",
+  "draft_primary": "z-lab/Qwen3.8-27B-DFlash2 @ ac04198556d7e8867853cbc356807b969f311b05 (DFlash2DraftModel, block 8 = K8, unquant)",
   "draft_prior": "RadixArk/Qwen3.8-27B-DSpark (DSparkDraftModel, block 7, unquant)",
   "engine": "qwen38-27b-sglang-dflash2-sm121:0.2.0 = lmsysorg/sglang@sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6 + sgl-project/sglang#c14312a (PR #35371) overlay + r0b0tlab quantized-lm_head selector compat",
   "identity": {
@@ -25,12 +25,12 @@
       "ifeval": "37/40",
       "agentic": "18/20"
     },
-    "niah_262144": "PASS 8/8 EAGLE and 8/8 DSpark (vLLM niah-results.json shape); DFlash2 NIAH not run",
+    "niah_262144": "PASS 8/8 EAGLE and 8/8 DSpark (vLLM niah-results.json shape); DFlash2 full-M 25/50/90 PASS via r0b0bench core-subset (65472/130944/235699, exact retrieval)",
     "perf_think_off": {
       "dflash2_dedicated_c1_median": 28.38,
       "dflash2_c8_best": 92.05,
       "eagle_dedicated_c1_median": 25.62,
-      "eagle_c8_best": 123.90,
+      "eagle_c8_best": 123.9,
       "dspark_dedicated_c1_median": 20.97,
       "dspark_c8_best": 82.53
     },
@@ -39,6 +39,25 @@
       "eagle_c8_best": 92.97,
       "dspark_dedicated_c1_median": 19.83,
       "dspark_c8_best": 80.94
+    },
+    "r0b0bench_core_subset_dflash2_think_off": {
+      "profile": "core-subset (11 lanes), think-off, K=8",
+      "result": "11/11 PASS, infra_errors_total=0, invalid_for_publish=false",
+      "quality": {
+        "gsm8k": 0.865,
+        "arc_easy": 0.9625,
+        "ifeval_lightweight": 0.82,
+        "humaneval_pass1": 0.872
+      },
+      "bfcl": {
+        "multi_turn_base": 0.69,
+        "ast600_micro": 0.2733
+      },
+      "ledger_entry": "qwen38-27b-nvfp4-sglang-dflash2-k8-core-subset-20260819",
+      "serve_deltas": [
+        "--enable-metrics",
+        "mem-fraction-static 0.73 (KV 262611 >= full 262144 window)"
+      ]
     }
   },
   "vllm_floor_think_off": {
@@ -48,8 +67,16 @@
     "c8_mtp_best": 82.89
   },
   "dflash2_vs_dspark_e2e": {
-    "q200_gsm8k_mean_e2e_tok_s": {"dspark": 37.59, "dflash2": 52.63, "delta_pct": 40},
-    "q200_all200_mean_e2e_tok_s": {"dspark": 38.09, "dflash2": 47.53, "delta_pct": 25}
+    "q200_gsm8k_mean_e2e_tok_s": {
+      "dspark": 37.59,
+      "dflash2": 52.63,
+      "delta_pct": 40
+    },
+    "q200_all200_mean_e2e_tok_s": {
+      "dspark": 38.09,
+      "dflash2": 47.53,
+      "delta_pct": 25
+    }
   },
   "note": "Think-on is throughput-only (run_perf_suite.sh). Quality and NIAH stay think-off. DFlash2 is the new production winner over DSpark on every throughput lane at quality parity."
 }

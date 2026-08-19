@@ -1,7 +1,7 @@
 {
   "run_id": "sglang-dflash2-q200",
   "engine": "sglang",
-  "profile": "native DFLASH K=7 (DFlash2 conv+selector)",
+  "profile": "native DFLASH K=8 (DFlash2 conv+selector)",
   "thinking": "off",
   "n": 200,
   "set_sha256": "ca35650e0bf4c9997772276c15a7116afd553a305b10c88182f52f050b76e066",

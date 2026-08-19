@@ -1,8 +1,8 @@
 {
-  "profile": "SGLang native DFLASH K=7 (DFlash2 conv+selector) + z-lab Qwen3.8-27B-DFlash2 draft + fp8 KV auto + mem-fraction 0.70",
+  "profile": "SGLang native DFLASH K=8 (DFlash2 conv+selector) + z-lab Qwen3.8-27B-DFlash2 draft + fp8 KV auto + mem-fraction 0.70",
   "image": "qwen38-27b-sglang-dflash2-sm121:0.2.0 (lmsysorg/sglang@sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6 + sgl-project/sglang#c14312a overlay)",
   "checkpoint": "r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121 (4-of-4)",
-  "draft": "z-lab/Qwen3.8-27B-DFlash2 @ ac04198556d7e8867853cbc356807b969f311b05 (DFlash2DraftModel, block 8 = K7, unquant)",
+  "draft": "z-lab/Qwen3.8-27B-DFlash2 @ ac04198556d7e8867853cbc356807b969f311b05 (DFlash2DraftModel, block 8 = K8, unquant)",
   "thinking": "off",
   "protocol": "vllm-repo-run_perf_suite.sh via sglang.bench_serving --backend sglang-oai-chat",
   "dedicated_c1_median_tok_s": 28.4,

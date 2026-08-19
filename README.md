@@ -2,11 +2,15 @@
 
 Click-run package for official SGLang day-0 on one GB10. Measured on
 `lmsysorg/sglang@sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6`
-with the published 4-of-4 body [`r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121`](https://huggingface.co/r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121)
-and official [`RadixArk/Qwen3.8-27B-DSpark`](https://huggingface.co/RadixArk/Qwen3.8-27B-DSpark).
+with the published 4-of-4 body [`r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121`](https://huggingface.co/r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121).
+Production drafter: [`z-lab/Qwen3.8-27B-DFlash2`](https://huggingface.co/z-lab/Qwen3.8-27B-DFlash2)
+(`DFlash2DraftModel`, block 8 = K8; overlay image below). Prior candidate:
+official [`RadixArk/Qwen3.8-27B-DSpark`](https://huggingface.co/RadixArk/Qwen3.8-27B-DSpark)
+(native DSPARK K7).
 
 Do **not** use the vLLM `Qwen3DSparkModel` adapter. SGLang wants raw
-`DSparkDraftModel` and `--speculative-algorithm DSPARK`.
+`DSparkDraftModel` and `--speculative-algorithm DSPARK` (or `DFlash2DraftModel`
++ `--speculative-algorithm DFLASH` for the DFlash2 profile).
 
 Do **not** use `unsloth/Qwen3.8-27B-NVFP4` (SGLang #34895).
 

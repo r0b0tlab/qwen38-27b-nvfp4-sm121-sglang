@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Official SGLang day-0 launch for Qwen3.8-27B NVFP4 on one GB10.
-# Usage: MODEL_DIR=... [DRAFT_DIR=...] [IMAGE=...] bash scripts/serve.sh {ar|eagle|dspark}
+# Usage: MODEL_DIR=... [DRAFT_DIR=...] [IMAGE=...] bash scripts/serve.sh {ar|eagle|dspark|dflash2}
 set -euo pipefail
 PROFILE="${1:-dspark}"
 IMAGE="${IMAGE:-lmsysorg/sglang@sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6}"
@@ -51,7 +51,16 @@ case "$PROFILE" in
       --speculative-draft-model-quantization unquant
     )
     ;;
-  *) echo "profile ar|eagle|dspark"; exit 6 ;;
+  dflash2)
+    [ -n "$DRAFT_DIR" ] && [ -f "$DRAFT_DIR/config.json" ] || { echo "DRAFT_DIR required for dflash2"; exit 4; }
+    VOLS+=(-v "$DRAFT_DIR:/draft:ro")
+    EXTRA=(
+      --speculative-algorithm DFLASH
+      --speculative-draft-model-path /draft
+      --speculative-num-draft-tokens "${DFLASH_BLOCK_SIZE:-8}"
+    )
+    ;;
+  *) echo "profile ar|eagle|dspark|dflash2"; exit 6 ;;
 esac
 
 docker rm -f "$NAME" >/dev/null 2>&1 || true

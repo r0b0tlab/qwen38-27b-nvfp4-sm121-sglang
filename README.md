@@ -33,14 +33,37 @@ command, wait for `ready after N probes`, and expect the semantic gate to print
 Manual:
 
 ```bash
+# DFlash2 (production winner)
 MODEL_DIR=~/models/r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121 \
 DRAFT_DIR=~/models/z-lab/Qwen3.8-27B-DFlash2 \
 IMAGE=qwen38-27b-sglang-dflash2-sm121:0.2.0 \
   bash scripts/serve.sh dflash2
+
+# DSpark
+MODEL_DIR=~/models/r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121 \
+DRAFT_DIR=~/models/RadixArk/Qwen3.8-27B-DSpark \
+  bash scripts/serve.sh dspark
 ```
 
+### Prerequisites (any machine with one GB10-class GPU + Docker)
+
+1. Docker with NVIDIA Container Toolkit (`docker run --gpus all` works).
+2. Python 3 with `huggingface-cli` on PATH for the click-run downloads
+   (`pip install -U "huggingface_hub[cli]"`). Anonymous downloads suffice —
+   both checkpoints are public.
+3. ~25 GB free disk (21 GB body + 4 GB DFlash2 draft) plus Docker image space.
+4. Ports 30000 free (override with `PORT=`).
+
+Everything else the scripts do themselves: fetch checkpoints if missing,
+validate draft architecture (`DFlash2DraftModel` with conv+selector fields),
+build the overlay image from `docker/Dockerfile.dflash2` if absent, launch,
+fail-closed `/health` (90 × 10 s probes), and run the 10-check semantic gate.
+Expected end state: `ready after N probes` then `"passed": true` and the
+canary `19 × 23 → 437`.
+
 Default port **30000**. Default `--mem-fraction-static 0.70` (NIAH used 0.85).
-Image default is the digest above. Override with `IMAGE=`.
+DSpark/EAGLE default to the pinned digest above; DFlash2 defaults to the
+overlay tag. Override with `IMAGE=`.
 
 ## Container
 

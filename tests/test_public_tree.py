@@ -18,6 +18,7 @@ REQUIRED = (
     "scripts/serve.sh",
     "scripts/click_run_dspark.sh",
     "scripts/click_run_eagle.sh",
+    "scripts/click_run_dflash2.sh",
     "scripts/run_semantic_gate.py",
     "scripts/run_quality_set.py",
     "scripts/run_perf_suite.sh",
@@ -31,8 +32,11 @@ REQUIRED = (
     "perf-summary-dspark.json",
     "perf-summary-eagle-thinkon.json",
     "perf-summary-dspark-thinkon.json",
+    "perf-summary-dflash2.json",
     "quality-200-sglang-dspark.json",
+    "quality-200-sglang-dflash2.json",
     "reference/think-on-extra.json",
+    "docker/Dockerfile.dflash2",
 )
 
 
@@ -70,21 +74,25 @@ def test_readme_documents_click_run() -> None:
     text = (ROOT / "README.md").read_text()
     for needle in (
         "scripts/serve.sh dspark",
+        "scripts/serve.sh dflash2",
         "scripts/click_run_dspark.sh",
         "scripts/click_run_eagle.sh",
+        "scripts/click_run_dflash2.sh",
         "DSparkDraftModel",
         "sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6",
         "quality-200.jsonl",
         "19 × 23",
         "Qwen3DSparkModel",
         "run_perf_suite.sh",
+        "Prerequisites",
+        "huggingface-cli",
     ):
         assert needle in text, needle
 
 
 def test_serve_script_covers_official_profiles() -> None:
     text = (ROOT / "scripts/serve.sh").read_text()
-    for needle in ("ar)", "eagle)", "dspark)", "DSPARK", "qwen3_coder", "flashinfer", "sha256:3c0abdf4"):
+    for needle in ("ar)", "eagle)", "dspark)", "dflash2)", "DSPARK", "DFLASH", "qwen3_coder", "flashinfer", "sha256:3c0abdf4"):
         assert needle in text, needle
     assert "Qwen3DSparkModel" not in text
 

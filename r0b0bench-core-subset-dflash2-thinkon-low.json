@@ -1,0 +1,27 @@
+{
+  "profile": "SGLang native DFLASH K=8 (DFlash2) think-on reasoning_effort=low",
+  "client": "r0b0bench 1.0.0rc2 @ 9efa87a",
+  "run_id": "20260819T131141Z-4cb77485",
+  "invalid_for_publish": false,
+  "infra_errors_total": 0,
+  "lanes_pass": 11,
+  "template_kwargs": {"thinking": true, "enable_thinking": true, "reasoning_effort": "low"},
+  "budgets": {"quality_max_tokens": 4096, "niah_generation_reserve": 1024},
+  "scores": {
+    "gsm8k": 0.97,
+    "qa_arc_easy": 0.96,
+    "ifeval_lightweight": 0.845,
+    "humaneval_pass1": 0.975609756097561,
+    "bfcl_mt": 0.715,
+    "bfcl_ast_micro": 0.305,
+    "bfcl_ast": {"multiple": 0.19, "parallel": 0.535, "parallel_multiple": 0.19},
+    "niah_depths": [65280, 130560, 235008],
+    "niah": "3/3 PASS",
+    "decode_median_tok_s": 30.453265818618373,
+    "prefill_server_tok_s": 26320.079571533694,
+    "ttft_ms_mean": 216.44660324818688,
+    "concurrency_agg_tok_s": {"1": 61.063426579200716, "2": 113.85249978404912, "4": 187.48066294823764, "6": 252.58836783201104}
+  },
+  "ledger_entry": "qwen38-27b-nvfp4-sglang-dflash2-k8-core-subset-thinkon-low-20260819",
+  "report_sha256": "433eddbb44c224411069446bd0db1fc7874d58a34a337722b367b4d142839405"
+}

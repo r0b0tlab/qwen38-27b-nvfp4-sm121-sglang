@@ -246,6 +246,42 @@ Telemetry (15 s sampling across the whole campaign): suite window GPU util
 mean 95.7%, power mean 45.4 W (max 88.4 W), temp max 88 °C, spec
 accept-length mean 4.63.
 
+### Think-on-low companion row (same serve, 2026-08-19)
+
+Same DFlash2 K8 image/draft/mem 0.73. Client `1.0.0rc2` @ `9efa87a`
+(lanes no longer hardcode `thinking=false`; mode is only
+`R0B0BENCH_CHAT_TEMPLATE_KWARGS`). Effort `low`. Recorded campaign
+budget bump (reverted after): quality `max_tokens=4096`, NIAH
+`generation_reserve=1024`. **11/11 PASS, infra 0,
+`invalid_for_publish=false`.** report.json sha256 `433eddbb44c22441…`.
+
+| Lane | think-off | think-on-low | Δ |
+|---|---:|---:|---:|
+| GSM8K @200 | 0.865 | **0.970** | +10.5 pt |
+| ARC-Easy @400 | 0.9625 | 0.960 | −0.25 pt |
+| IFEval lightweight @200 | 0.82 | **0.845** | +2.5 pt |
+| HumanEval pass@1 @164 | 0.872 | **0.9756** | +10.4 pt |
+| BFCL-MT @200 | 0.69 | **0.715** | +2.5 pt |
+| BFCL-AST µ @600 | 0.2733 | **0.305** | +3.2 pt |
+| NIAH full-M | 65,472 / 130,944 / 235,699 | 65,280 / 130,560 / 235,008 | reserve 256→1024 |
+| decode median tok/s | 26.02 | **30.45** | +17.0% |
+| prefill server tok/s | 22,663 | **26,320** | +16.1% |
+| TTFT ms | 214.6 | 216.4 | +0.8% |
+| C1 / C2 / C4 / C6 agg | 68.6 / 124.3 / 212.0 / 276.4 | 61.1 / 113.9 / 187.5 / 252.6 | −8 to −12% |
+
+Latency 128-out stream reps all `finish=length` (harness budget held for
+A/B; first-token TTFT still measured). Throughput 2048-out hits the cap
+by design. Quality-lane truncation: GSM8K 200/200 `stop` (max 2,833 <
+4,096); QA 400/400 HTTP 200, 0 empty, max 14.9 s; IFEval 10/200 empty
+visible answers on letter-constraint prompts (model, not a 4,096-cap
+defect except one 206 s nontermination); HumanEval 1 empty
+(`HumanEval/145`).
+
+Ledger:
+`qwen38-27b-nvfp4-sglang-dflash2-k8-core-subset-thinkon-low-20260819`.
+Telemetry 807×15 s: GPU 88.1% mean / 96% max, power 38.5 W mean / 80.5 W
+max, 88 °C max, accept-length mean **5.03**.
+
 ## llama-benchy (diagnostic, not the claim row)
 
 `scripts/run_llama_benchy.sh` needs `--extra-body return_token_ids=false`

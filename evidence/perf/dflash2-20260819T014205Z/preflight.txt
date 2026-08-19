@@ -1,0 +1,7 @@
+run_id=dflash2-20260819T014205Z
+container=qwen38-dflash2 port=30000 model=qwen38-27b
+levels=1 2 4 8 reps=3 input=1024 output=256 c1_tokens=2048
+protocol=vllm-repo-run_perf_suite.sh
+extra_request_body={"chat_template_kwargs":{"enable_thinking":false}}
+2026-08-19T01:42:05+00:00
+{"object":"list","data":[{"id":"qwen38-27b","object":"model","created":1787103725,"owned_by":"sglang","root":"qwen38-27b","parent":null,"max_model_len":262144}]}

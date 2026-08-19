@@ -1,0 +1,69 @@
+EXTRA_BODY {"chat_template_kwargs":{"enable_thinking":false}}
+/sgl-workspace/sglang/python/sglang/srt/environ.py:1402: UserWarning: Environment variable SGLANG_FLASHINFER_PR4266_SOURCE has been deprecated.
+  warnings.warn(f"Environment variable {old_name} has been deprecated.")
+W0819 01:52:20.781000 1843 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W0819 01:52:20.800000 1843 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+/sgl-workspace/sglang/python/sglang/bench_serving.py:13: FutureWarning: `sglang.bench_serving` is deprecated and will be removed in a future release; use `sglang.benchmark.serving` instead (e.g. `python -m sglang.benchmark.serving`).
+  warnings.warn(
+benchmark_args=Namespace(backend='sglang-oai-chat', base_url='http://127.0.0.1:30000', host='0.0.0.0', port=None, ready_check_timeout_sec=60, dataset_name='random', dataset_path='', dataset_offset=0, agentic_max_turns=None, speed_bench_category=None, speed_bench_output_len=512, model='qwen38-27b', served_model_name=None, tokenizer='/model', num_prompts=32, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=1024, random_output_len=256, random_range_ratio=0.0, image_count=1, image_resolution='1080p', random_image_count=False, image_format='jpeg', image_content='random', request_rate=inf, use_trace_timestamps=False, max_concurrency=8, output_file='/tmp/dflash2-20260819T014205Z-qwen38-c8-r2.json', output_details=False, print_requests=False, disable_tqdm=False, disable_stream=False, return_logprob=False, top_logprobs_num=0, token_ids_logprob=None, logprob_start_len=-1, return_routed_experts=False, cache_report=False, seed=0, disable_ignore_eos=False, temperature=0.0, top_p=1.0, extra_request_body='{"chat_template_kwargs":{"enable_thinking":false}}', apply_chat_template=False, profile=False, plot_throughput=False, profile_activities=['CPU', 'GPU'], profile_start_step=None, profile_steps=None, profile_num_steps=None, profile_by_stage=False, profile_stages=None, profile_output_dir=None, profile_prefix=None, lora_name=None, lora_request_distribution='uniform', lora_zipf_alpha=1.5, prompt_suffix='', pd_separated=False, profile_prefill_url=None, profile_decode_url=None, flush_cache=True, flush_cache_timeout=60.0, warmup_requests=1, tokenize_prompt=False, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, gsp_range_ratio=1.0, gsp_fast_prepare=False, gsp_send_routing_key=False, gsp_num_turns=1, gsp_ordered=False, gsp_group_distribution='uniform', gsp_zipf_alpha=None, mooncake_slowdown_factor=1.0, mooncake_num_rounds=1, mooncake_workload='conversation', fake_prefill=False, tag=None, header=None)
+Waiting up to 60s for http://127.0.0.1:30000/v1/models to become ready...
+Server ready in 0.0s.
+Fail to load tokenizer config with error=qwen38-27b is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`
+
+WARNING It is recommended to use the `Chat` or `Instruct` model for benchmarking.
+Because when the tokenizer counts the output tokens, if there is gibberish, it might count incorrectly.
+
+Namespace(backend='sglang-oai-chat', base_url='http://127.0.0.1:30000', host='0.0.0.0', port=30000, ready_check_timeout_sec=60, dataset_name='random', dataset_path='', dataset_offset=0, agentic_max_turns=None, speed_bench_category=None, speed_bench_output_len=512, model='qwen38-27b', served_model_name=None, tokenizer='/model', num_prompts=32, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=1024, random_output_len=256, random_range_ratio=0.0, image_count=1, image_resolution='1080p', random_image_count=False, image_format='jpeg', image_content='random', request_rate=inf, use_trace_timestamps=False, max_concurrency=8, output_file='/tmp/dflash2-20260819T014205Z-qwen38-c8-r2.json', output_details=False, print_requests=False, disable_tqdm=False, disable_stream=False, return_logprob=False, top_logprobs_num=0, token_ids_logprob=None, logprob_start_len=-1, return_routed_experts=False, cache_report=False, seed=0, disable_ignore_eos=False, temperature=0.0, top_p=1.0, extra_request_body='{"chat_template_kwargs":{"enable_thinking":false}}', apply_chat_template=False, profile=False, plot_throughput=False, profile_activities=['CPU', 'GPU'], profile_start_step=None, profile_steps=None, profile_num_steps=None, profile_by_stage=False, profile_stages=None, profile_output_dir=None, profile_prefix=None, lora_name=None, lora_request_distribution='uniform', lora_zipf_alpha=1.5, prompt_suffix='', pd_separated=False, profile_prefill_url=None, profile_decode_url=None, flush_cache=True, flush_cache_timeout=60.0, warmup_requests=1, tokenize_prompt=False, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, gsp_range_ratio=1.0, gsp_fast_prepare=False, gsp_send_routing_key=False, gsp_num_turns=1, gsp_ordered=False, gsp_group_distribution='uniform', gsp_zipf_alpha=None, mooncake_slowdown_factor=1.0, mooncake_num_rounds=1, mooncake_workload='conversation', fake_prefill=False, tag=None, header=None)
+
+#Input tokens: 17054
+#Output tokens: 4884
+Starting warmup with 1 sequences...
+Warmup completed with 1 sequences. Starting main benchmark run...
+  0%|          | 0/32 [00:00<?, ?it/s]  3%|▎         | 1/32 [00:07<03:54,  7.58s/it]  6%|▋         | 2/32 [00:09<02:11,  4.40s/it]  9%|▉         | 3/32 [00:09<01:11,  2.47s/it] 12%|█▎        | 4/32 [00:12<01:15,  2.69s/it] 16%|█▌        | 5/32 [00:15<01:10,  2.60s/it] 19%|█▉        | 6/32 [00:17<01:01,  2.35s/it] 22%|██▏       | 7/32 [00:19<00:54,  2.16s/it] 25%|██▌       | 8/32 [00:19<00:36,  1.53s/it] 28%|██▊       | 9/32 [00:21<00:37,  1.62s/it] 31%|███▏      | 10/32 [00:22<00:32,  1.49s/it] 34%|███▍      | 11/32 [00:22<00:25,  1.24s/it] 38%|███▊      | 12/32 [00:25<00:32,  1.61s/it] 44%|████▍     | 14/32 [00:27<00:23,  1.29s/it] 47%|████▋     | 15/32 [00:29<00:24,  1.44s/it] 50%|█████     | 16/32 [00:30<00:24,  1.55s/it] 53%|█████▎    | 17/32 [00:31<00:19,  1.27s/it] 56%|█████▋    | 18/32 [00:32<00:16,  1.15s/it] 59%|█████▉    | 19/32 [00:34<00:18,  1.40s/it] 62%|██████▎   | 20/32 [00:35<00:15,  1.26s/it] 66%|██████▌   | 21/32 [00:36<00:12,  1.12s/it] 69%|██████▉   | 22/32 [00:36<00:08,  1.18it/s] 72%|███████▏  | 23/32 [00:37<00:08,  1.04it/s] 75%|███████▌  | 24/32 [00:42<00:17,  2.13s/it] 78%|███████▊  | 25/32 [00:43<00:13,  1.89s/it] 81%|████████▏ | 26/32 [00:46<00:12,  2.03s/it] 84%|████████▍ | 27/32 [00:47<00:08,  1.73s/it] 91%|█████████ | 29/32 [00:48<00:03,  1.30s/it] 94%|█████████▍| 30/32 [00:48<00:02,  1.02s/it] 97%|█████████▋| 31/32 [00:51<00:01,  1.53s/it]100%|██████████| 32/32 [00:52<00:00,  1.43s/it]100%|██████████| 32/32 [00:52<00:00,  1.66s/it]
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang-oai-chat
+Traffic request rate:                    inf       
+Max request concurrency:                 8         
+Successful requests:                     32        
+Benchmark duration (s):                  53.06     
+Total input tokens:                      17054     
+Total input text tokens:                 17054     
+Total generated tokens:                  4884      
+Total generated tokens (retokenized):    4614      
+Request throughput (req/s):              0.60      
+Input token throughput (tok/s):          321.43    
+Output token throughput (tok/s):         92.05     
+Peak output token throughput (tok/s):    48.00     
+Peak concurrent requests:                10        
+Total token throughput (tok/s):          413.48    
+Concurrency:                             7.28      
+Accept length:                           3.58      
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   12066.09  
+Median E2E Latency (ms):                 11927.91  
+P90 E2E Latency (ms):                    20824.27  
+P95 E2E Latency (ms):                    21787.52  
+P99 E2E Latency (ms):                    24348.56  
+---------------Time to First Token----------------
+Mean TTFT (ms):                          1687.47   
+Median TTFT (ms):                        1204.14   
+P90 TTFT (ms):                           3791.81   
+P95 TTFT (ms):                           3791.94   
+P99 TTFT (ms):                           3792.10   
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          69.42     
+Median TPOT (ms):                        67.60     
+P90 TPOT (ms):                           100.08    
+P95 TPOT (ms):                           113.29    
+P99 TPOT (ms):                           134.67    
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           71.20     
+Median ITL (ms):                         37.80     
+P90 ITL (ms):                            160.49    
+P95 ITL (ms):                            190.48    
+P99 ITL (ms):                            565.76    
+Max ITL (ms):                            1305.58   
+==================================================
+  qwen38-c8-r2.json: output_throughput=92.05 tok/s completed=32 accept=3.575107296137339 errors=None

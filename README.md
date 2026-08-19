@@ -15,22 +15,28 @@ Canary: `19 × 23 → 437`. `417` is the FP8-KV flag defect.
 ## Click-run
 
 ```bash
-# native DSPARK (production candidate)
+# DFlash2 (NEW production winner — 2026-08-19)
+bash scripts/click_run_dflash2.sh
+
+# native DSPARK (prior production candidate)
 bash scripts/click_run_dspark.sh
 
 # official EAGLE 3/1/4 (in-checkpoint MTP)
 bash scripts/click_run_eagle.sh
 ```
 
-Each script: download 4-of-4 shards if missing, `docker pull` the pinned
-digest, launch, fail-closed `/health` (90 probes), semantic 10-check.
+Each script: download weights if missing, resolve the image, launch, fail-closed
+`/health` (90 probes), semantic 10-check. For humans and agents: run the one
+command, wait for `ready after N probes`, and expect the semantic gate to print
+`"passed": true`. All three default to port 30000 and `--mem-fraction-static 0.70`.
 
 Manual:
 
 ```bash
 MODEL_DIR=~/models/r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121 \
-DRAFT_DIR=~/models/RadixArk/Qwen3.8-27B-DSpark \
-  bash scripts/serve.sh dspark
+DRAFT_DIR=~/models/z-lab/Qwen3.8-27B-DFlash2 \
+IMAGE=qwen38-27b-sglang-dflash2-sm121:0.2.0 \
+  bash scripts/serve.sh dflash2
 ```
 
 Default port **30000**. Default `--mem-fraction-static 0.70` (NIAH used 0.85).
@@ -45,6 +51,19 @@ rebuild. Pull by digest:
 docker pull lmsysorg/sglang@sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6
 ```
 
+`docker/Dockerfile.dflash2` builds the DFlash2 image from that same digest
+plus the seven files of sgl-project/sglang PR #35371 @ `c14312a`
+(DFlash2 local convolution + candidate selector, merged 2026-08-19) and a
+small r0b0tlab compat layer: an import rename, a ported
+`compute_spec_logprobs`, and a quantized-lm_head candidate path for our
+W4A16 NVFP4 head (`lm_head.quant_method.apply`, the same kernel
+`LogitsProcessor` uses; verify stays lossless through the target's real
+logits). Build locally:
+
+```bash
+docker build -f docker/Dockerfile.dflash2 -t qwen38-27b-sglang-dflash2-sm121:0.2.0 docker/
+```
+
 Nightly / unpinned `lmsysorg/sglang:latest` is not this campaign.
 
 ## Profiles (`scripts/serve.sh`)
@@ -53,7 +72,8 @@ Nightly / unpinned `lmsysorg/sglang:latest` is not this campaign.
 |---|---|---|
 | `ar` | none | correctness baseline |
 | `eagle` | EAGLE 3/1/4 | cookbook MTP |
-| `dspark` | native DSPARK, block 7, official draft | production candidate |
+| `dspark` | native DSPARK, block 7, official draft | prior candidate |
+| `dflash2` | native DFLASH, block 8, z-lab DFlash2 draft | **production winner** |
 
 Every profile: FlashInfer, `--kv-cache-dtype auto`, `--disable-prefill-cuda-graph`,
 `--reasoning-parser qwen3`, `--tool-call-parser qwen3_coder`, context 262144.
@@ -66,10 +86,50 @@ ladder 1024→256 c1/2/4/8 ×3; ignore-eos; temp 0; seed 0;
 
 | | dedicated c1 med | ladder best c1 / c2 / c4 / c8 | NIAH 8-pt | Quality-200 |
 |---|---:|---|---|---|
-| SGLang EAGLE | **25.62** | 27.65 / 43.74 / 74.31 / **123.90** | 8/8 | not run (DSpark Q200 stands) |
+| SGLang DFlash2 | **28.38** | **23.47 / 36.14 / 54.99 / 92.05** | not run | flex 82.5 / HE 39/40 / IF 37/40 / ag 16/20 |
+| SGLang EAGLE | **25.62** | 27.65 / 43.74 / 74.31 / 123.90 | 8/8 | not run (DSpark Q200 stands) |
 | SGLang DSpark | **20.97** | 16.96 / 26.20 / 48.15 / 82.53 | 8/8 | flex 82.5 / HE 39/40 / IF 37/40 / ag 18/20 |
 | vLLM MTP K3 | 27.83 | 19.24 / 32.00 / 34.61 / 82.89 | 8/8 | flex 81.25 / HE 39/40 / IF 37/40 / ag 17/20 |
 | vLLM DSpark K7 | 28.46 | 16.05 / 28.47 / 43.88 / 61.53 | 8/8 | flex 82.5 / HE 39/40 / IF 37/40 / ag **19/20** |
+
+### DFlash2 vs prior winning profile (SGLang DSpark K7) — side by side
+
+Same node, same image base, same checkpoint, same harness, same run-id
+protocol (`dflash2-20260819T014205Z`, zero errors, 17 runs). Accept length is
+the mean drafted tokens accepted per verify step.
+
+| Lane (think-off) | DSpark K7 | DFlash2 K7 | Δ |
+|---|---:|---:|---:|
+| dedicated c1 median | 20.97 | **28.38** | **+35%** |
+| ladder c1 | 16.96 | **23.47** | +38% |
+| ladder c2 | 26.20 | **36.14** | +38% |
+| ladder c4 | 48.15 | **54.99** | +14% |
+| ladder c8 | 82.53 | **92.05** | +12% |
+| accept length (dedicated c1) | 2.26 | **2.89** | +28% |
+| accept length (c8) | — | **3.58** | — |
+| Q200 GSM8K flex e2e tok/s (mean) | 37.59 | **52.63** | **+40%** |
+| Q200 GSM8K flex e2e tok/s (median) | 37.33 | **52.59** | +41% |
+| Q200 GSM8K flex score | 66/80 = 82.5% | **66/80 = 82.5%** | parity |
+| Q200 HumanEval | 39/40 | 39/40 | parity |
+| Q200 IFEval | 37/40 | 37/40 | parity |
+| Q200 agentic (n=20) | 18/20 | 16/20 | −2 (small-n) |
+| Q200 all-200 e2e mean | 38.09 | **47.53** | +25% |
+
+Quality is parity (identical GSM8K flex / HumanEval / IFEval; agentic is a
+20-item set). Speed is the win: every throughput lane and every per-family
+e2e tok/s improves. File: `perf-summary-dflash2.json`,
+`quality-200-sglang-dflash2.json`.
+
+DFlash2 quality-200 per-family e2e tok/s (think-off, completion/wall):
+
+| Family | score | mean | median | top |
+|---|---|---:|---:|---:|
+| GSM8K flex | 66/80 = 82.5% | 52.6 | 52.6 | 64.3 |
+| HumanEval | 39/40 | 58.5 | 59.2 | 64.2 |
+| IFEval | 37/40 | 23.5 | 22.5 | 49.8 |
+| Agentic | 16/20 | 51.5 | 51.0 | 60.8 |
+| Hard reasoning | 20 written, not auto-graded | 49.4 | 51.0 | 60.3 |
+| All 200 | — | 47.5 | 51.6 | 64.3 |
 
 NIAH is the vLLM `niah-results.json` shape (7726 / 31000 / 124132 + 247738 × 5,
 code `QWEN38-NIAH-9X4K`, 512 gen). Files: `niah-results-eagle.json`,

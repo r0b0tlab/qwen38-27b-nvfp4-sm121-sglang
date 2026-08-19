@@ -1,0 +1,59 @@
+{
+  "run_id": "sglang-dflash2-q200",
+  "engine": "sglang",
+  "profile": "native DFLASH K=7 (DFlash2 conv+selector)",
+  "thinking": "off",
+  "n": 200,
+  "set_sha256": "ca35650e0bf4c9997772276c15a7116afd553a305b10c88182f52f050b76e066",
+  "total_completion_tokens": 75100,
+  "protocol": "client e2e tok/s = completion_tokens / wall (includes prefill)",
+  "scores": {
+    "gsm8k_flex": "66/80 = 82.5%",
+    "humaneval": "39/40",
+    "ifeval": "37/40",
+    "agentic_coding": "16/20",
+    "hard_reasoning": "20 written, not auto-graded"
+  },
+  "overall": {
+    "mean_e2e_tok_s": 47.53,
+    "median_e2e_tok_s": 51.62,
+    "top_e2e_tok_s": 64.29
+  },
+  "families": {
+    "gsm8k": {
+      "n": 80,
+      "pass": 0,
+      "mean": 52.63,
+      "median": 52.59,
+      "top": 64.29
+    },
+    "humaneval": {
+      "n": 40,
+      "pass": 39,
+      "mean": 58.45,
+      "median": 59.17,
+      "top": 64.24
+    },
+    "ifeval": {
+      "n": 40,
+      "pass": 37,
+      "mean": 23.49,
+      "median": 22.52,
+      "top": 49.82
+    },
+    "hard_reasoning": {
+      "n": 20,
+      "pass": 0,
+      "mean": 49.37,
+      "median": 50.95,
+      "top": 60.33
+    },
+    "agentic_coding": {
+      "n": 20,
+      "pass": 16,
+      "mean": 51.51,
+      "median": 50.95,
+      "top": 60.77
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "profile": "SGLang native DFLASH K=7 (DFlash2 conv+selector) + z-lab Qwen3.8-27B-DFlash2 draft + fp8 KV auto + mem-fraction 0.70",
+  "image": "qwen38-27b-sglang-dflash2-sm121:0.2.0 (lmsysorg/sglang@sha256:3c0abdf41ef22de9d7a859dc16ed71eae69452e36c91f071a25e60c85a6d1fc6 + sgl-project/sglang#c14312a overlay)",
+  "checkpoint": "r0b0tlab/Qwen3.8-27B-NVFP4-MTP-sm121 (4-of-4)",
+  "draft": "z-lab/Qwen3.8-27B-DFlash2 @ ac04198556d7e8867853cbc356807b969f311b05 (DFlash2DraftModel, block 8 = K7, unquant)",
+  "thinking": "off",
+  "protocol": "vllm-repo-run_perf_suite.sh via sglang.bench_serving --backend sglang-oai-chat",
+  "dedicated_c1_median_tok_s": 28.4,
+  "dedicated_c1_best_tok_s": 28.46,
+  "dedicated_c1_reps": [28.45, 28.46, 28.39, 28.4, 28.37],
+  "dedicated_c1_accept_mean": 2.89,
+  "ladder_best": {"c1": 23.47, "c2": 36.14, "c4": 54.99, "c8": 92.05},
+  "ladder_accept": {"c1": 2.879, "c2": 3.154, "c4": 3.338, "c8": 3.575},
+  "zero_errors": true,
+  "runs": 17,
+  "run_id": "dflash2-20260819T014205Z"
+}
